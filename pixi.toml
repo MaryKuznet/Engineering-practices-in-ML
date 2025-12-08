@@ -1,0 +1,26 @@
+[workspace]
+channels = ["conda-forge"]
+name = "Engineering-practices-in-ML"
+platforms = ["win-64"]
+version = "0.1.0"
+
+[tasks]
+format = "black . && isort ."
+lint = "ruff check ."
+types = "mypy src"
+security = "bandit -r src"
+precommit = "pre-commit run --all-files"
+
+[dependencies]
+python = "3.11.*"
+black = ">=25.1.0,<26"
+isort = ">=7.0.0,<8"
+ruff = ">=0.14.5,<0.15"
+mypy = ">=1.18.2,<2"
+bandit = ">=1.9.1,<2"
+pre-commit = ">=4.4.0,<5"
+numpy = ">=2.3.5,<3"
+pandas = ">=2.3.3,<3"
+scikit-learn = ">=1.7.2,<2"
+seaborn = ">=0.13.2,<0.14"
+matplotlib = ">=3.10.8,<4"
