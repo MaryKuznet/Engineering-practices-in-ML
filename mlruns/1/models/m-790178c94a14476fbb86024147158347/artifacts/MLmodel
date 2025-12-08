@@ -1,0 +1,22 @@
+artifact_path: file:///C:/Users/masha/PycharmProjects/Engineering-practices-in-ML/mlruns/1/models/m-790178c94a14476fbb86024147158347/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.11.14
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.7.2
+mlflow_version: 3.7.0
+model_id: m-790178c94a14476fbb86024147158347
+model_size_bytes: 1736
+model_uuid: m-790178c94a14476fbb86024147158347
+prompts: null
+run_id: 4b6af53661f646bfbc501a9c919a1852
+utc_time_created: '2025-12-08 04:56:22.360757'
