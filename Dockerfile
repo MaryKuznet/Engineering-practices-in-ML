@@ -4,8 +4,10 @@ RUN pip install pixi
 
 WORKDIR /app
 
-COPY pixi.toml pixi.lock ./
-COPY pyproject.toml ./
-COPY src ./src
+COPY pixi.toml pixi.lock pyproject.toml ./
+COPY . .
+#COPY src ./src
 
 RUN pixi install
+
+CMD ["bash"]
