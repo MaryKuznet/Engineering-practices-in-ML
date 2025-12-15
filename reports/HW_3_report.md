@@ -38,7 +38,6 @@ pixi add mlflow
 Для хранения метаданных экспериментов используется **SQLite backend**, а для артефактов — локальное файловое хранилище:
 
 - backend store: `mlflow.db`
-- artifact store: `./mlartifacts`
 
 Запуск MLflow Tracking Server:
 
