@@ -109,19 +109,33 @@ mlflow.sklearn.log_model(
 ### 3. MLflow UI
 ```pixi run mlflow ui```
 
-Также приложила скрины из MLflow
-
+1. MLflow UI с экспериментами
+![MLflow runs](figures/HW_2/mlflow.png)
+2. Сравнение моделей
+![MLflow runs](figures/HW_2/mlflow_compare_models.png)
 ---
 
 # Воспроизводимость
 
 ### 1. Инструкции по воспроизведению
 
+a) Клонирование репозитория, переключение на нужную ветку, установка зависимостей
 ```bash
-git clone <repo>
+git clone https://github.com/MaryKuznet/Engineering-practices-in-ML.git
 cd Engineering-practices-in-ML
+git checkout Homework_2
 pixi install
+```
+
+b) Загрузка данных с помощью dvc
+
+```bash
 pixi run dvc pull
+```
+
+c) Обучим модель и посмотрим результаты в mlflow
+
+```bash
 pixi run python src/models/LogReg.py
 pixi run mlflow ui
 ```
@@ -132,17 +146,7 @@ pixi run mlflow ui
 - `pixi.toml`  
 - `pixi.lock`
 
-### 3. Тест воспроизводимости
-
-Удалено окружение → выполнено:
-
-```bash
-pixi install
-pixi run dvc pull
-pixi run python src/models/LogReg.py
-```
-
-### 4. Docker контейнер
+### 3. Docker контейнер
 
 ```dockerfile
 FROM python:3.11-slim
