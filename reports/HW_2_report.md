@@ -126,6 +126,7 @@ cd Engineering-practices-in-ML
 git checkout Homework_2
 pixi install
 ```
+pixi install может не заработать, если у вас не установлен pixi. Тогда сначала установите pixi -> [инструкция](https://pixi.prefix.dev/latest/#__tabbed_1_2)
 
 b) Загрузка данных с помощью dvc
 
