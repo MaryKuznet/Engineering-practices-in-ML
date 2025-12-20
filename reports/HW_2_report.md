@@ -147,18 +147,39 @@ pixi run mlflow ui
 - `pixi.toml`  
 - `pixi.lock`
 
-### 3. Docker контейнер
+### 3. Docker контейнер и воспроизведение через него
 
-```dockerfile
-FROM python:3.11-slim
-RUN pip install pixi
-WORKDIR /app
-COPY pixi.toml pixi.lock pyproject.toml ./
-COPY . .
-RUN pixi install
-CMD ["bash"]
+Сам файл можно посмотреть в корне проекта. Добавила туда:
+- установку pixi
+- sh файлы для автоматического исполнения скрипта:
+  - исполнение dvc pull
+  - исполнение кода обучения модели
+  - запуск ui mlflow
+
+**Чтобы воспроизвести решение через docker:**
+
+**Примечание**: Долго собирается и запускается, рекомендую первый вариант
+
+- Склонируйте репозиторий и переключитесь в новую ветку
+```bash
+git clone https://github.com/MaryKuznet/Engineering-practices-in-ML.git
+cd Engineering-practices-in-ML
+git checkout Homework_2
+pixi install
 ```
-
+- соберите контейнер
+```bash
+docker build --no-cache -t ml-dvc .
+```
+- запустите контейнер
+```bash
+docker run --rm -it `
+  -p 5000:5000 `
+  -v ${PWD}\dvc_storage:/dvc_storage `
+  -v ${PWD}\mlruns:/app/mlruns `
+  ml-dvc
+```
+- ui mlflow будет по ссылке http://localhost:5000
 ---
 
 # Заключение
