@@ -109,19 +109,34 @@ mlflow.sklearn.log_model(
 ### 3. MLflow UI
 ```pixi run mlflow ui```
 
-Также приложила скрины из MLflow
-
+1. MLflow UI с экспериментами
+![MLflow runs](figures/HW_2/mlflow.png)
+2. Сравнение моделей
+![MLflow runs](figures/HW_2/mlflow_compare_models.png)
 ---
 
 # Воспроизводимость
 
 ### 1. Инструкции по воспроизведению
 
+a) Клонирование репозитория, переключение на нужную ветку, установка зависимостей
 ```bash
-git clone <repo>
+git clone https://github.com/MaryKuznet/Engineering-practices-in-ML.git
 cd Engineering-practices-in-ML
+git checkout Homework_2
 pixi install
+```
+pixi install может не заработать, если у вас не установлен pixi. Тогда сначала установите pixi -> [инструкция](https://pixi.prefix.dev/latest/#__tabbed_1_2)
+
+b) Загрузка данных с помощью dvc
+
+```bash
 pixi run dvc pull
+```
+
+c) Обучим модель и посмотрим результаты в mlflow
+
+```bash
 pixi run python src/models/LogReg.py
 pixi run mlflow ui
 ```
@@ -132,28 +147,39 @@ pixi run mlflow ui
 - `pixi.toml`  
 - `pixi.lock`
 
-### 3. Тест воспроизводимости
+### 3. Docker контейнер и воспроизведение через него
 
-Удалено окружение → выполнено:
+Сам файл можно посмотреть в корне проекта. Добавила туда:
+- установку pixi
+- sh файлы для автоматического исполнения скрипта:
+  - исполнение dvc pull
+  - исполнение кода обучения модели
+  - запуск ui mlflow
 
+**Чтобы воспроизвести решение через docker:**
+
+**Примечание**: Долго собирается и запускается, рекомендую первый вариант
+
+- Склонируйте репозиторий и переключитесь в новую ветку
 ```bash
+git clone https://github.com/MaryKuznet/Engineering-practices-in-ML.git
+cd Engineering-practices-in-ML
+git checkout Homework_2
 pixi install
-pixi run dvc pull
-pixi run python src/models/LogReg.py
 ```
-
-### 4. Docker контейнер
-
-```dockerfile
-FROM python:3.11-slim
-RUN pip install pixi
-WORKDIR /app
-COPY pixi.toml pixi.lock pyproject.toml ./
-COPY . .
-RUN pixi install
-CMD ["bash"]
+- соберите контейнер
+```bash
+docker build --no-cache -t ml-dvc .
 ```
-
+- запустите контейнер
+```bash
+docker run --rm -it `
+  -p 5000:5000 `
+  -v ${PWD}\dvc_storage:/dvc_storage `
+  -v ${PWD}\mlruns:/app/mlruns `
+  ml-dvc
+```
+- ui mlflow будет по ссылке http://localhost:5000
 ---
 
 # Заключение
