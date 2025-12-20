@@ -82,7 +82,6 @@ target/
 !/data/processed/
 !*/.gitkeep
 !*.dvc
-dvc_storage
 
 /mlruns
 
