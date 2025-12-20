@@ -112,24 +112,60 @@ pixi run python -m src.models.Different_models
 - все эксперименты запускаются одной командой;
 - результаты доступны через MLflow UI.
 
-Команды для воспроизведения
-- Восстанавливаем данные
+### 1. Инструкции по воспроизведению
+
+a) Клонирование репозитория, переключение на нужную ветку, установка зависимостей
+```bash
+git clone https://github.com/MaryKuznet/Engineering-practices-in-ML.git
+cd Engineering-practices-in-ML
+git checkout Homework_3
+pixi install
 ```
-dvc pull
+pixi install может не заработать, если у вас не установлен pixi. Тогда сначала установите pixi -> [инструкция](https://pixi.prefix.dev/latest/#__tabbed_1_2)
+
+b) Загрузка данных с помощью dvc
+
+```bash
+pixi run dvc pull
 ```
-- Запускаем MLFlow
-```
+
+c) Обучим разные модели и посмотрим результаты в mlflow
+
+```bash
+pixi run python -m src.models.Different_models
 pixi run mlflow server \
   --backend-store-uri sqlite:///mlflow.db \
   --host 127.0.0.1 \
   --port 5000
+```
+d) Открываем MLflow UI в браузере: http://127.0.0.1:5000 и смотрим результаты
 
+### 2. Инструкции по воспроизведению через Docker
+
+**Чтобы воспроизвести решение через docker:**
+
+**Примечание**: Долго собирается и запускается, рекомендую первый вариант
+
+- Склонируйте репозиторий и переключитесь в новую ветку
+```bash
+git clone https://github.com/MaryKuznet/Engineering-practices-in-ML.git
+cd Engineering-practices-in-ML
+git checkout Homework_2
+pixi install
 ```
-- Запускаем эксперименты
+- соберите контейнер
+```bash
+docker build --no-cache -t ml-dvc .
 ```
-pixi run python -m src.models.Different_models
+- запустите контейнер
+```bash
+docker run --rm -it `
+  -p 5000:5000 `
+  -v ${PWD}\dvc_storage:/dvc_storage `
+  -v ${PWD}\mlruns:/app/mlruns `
+  ml-dvc
 ```
-- Открываем MLflow UI в браузере: http://127.0.0.1:5000 и смотрим результаты
+- ui mlflow будет по ссылке http://localhost:5000
 ---
 
 ## Скриншоты

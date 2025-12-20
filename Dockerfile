@@ -18,8 +18,8 @@ RUN pixi install
 COPY . .
 # Скрипты
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
-COPY run_container.sh /usr/local/bin/run_container.sh
-RUN chmod +x /usr/local/bin/docker-entrypoint.sh /usr/local/bin/run_container.sh
+COPY run_container_hw_2.sh /usr/local/bin/run_container.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh /usr/local/bin/run_container_hw_2.sh
 
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["/usr/local/bin/run_container.sh"]
