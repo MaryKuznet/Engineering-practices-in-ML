@@ -98,3 +98,7 @@ target/
 .pixi/*
 !.pixi/config.toml
 /.pixi/
+
+
+mlruns
+dvc_storage
