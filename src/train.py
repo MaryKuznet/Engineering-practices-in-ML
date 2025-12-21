@@ -7,7 +7,7 @@ from typing import Any, Dict, Tuple
 import joblib
 import pandas as pd
 
-from src.Different_models import make_model
+from src.models.Different_models import make_model
 
 PROCESSED_TRAIN_PATH = "data/processed/train_clean.csv"
 MODEL_OUT_PATH = "models/model.pkl"
