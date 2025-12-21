@@ -234,7 +234,7 @@ def grids() -> List[Tuple[str, List[Dict[str, Any]]]]:
 
 
 def main() -> None:
-    tracking_uri = os.environ.get("MLFLOW_TRACKING_URI", "http://127.0.0.1:5000")
+    tracking_uri = os.environ.get("MLFLOW_TRACKING_URI", "sqlite:///mlflow.db")
     cfg = RunConfig(
         experiment_name=EXPERIMENT_NAME,
         # tracking_uri="sqlite:///mlflow.db",

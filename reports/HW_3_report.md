@@ -133,10 +133,7 @@ c) Обучим разные модели и посмотрим результа
 
 ```bash
 pixi run python -m src.models.Different_models
-pixi run mlflow server \
-  --backend-store-uri sqlite:///mlflow.db \
-  --host 127.0.0.1 \
-  --port 5000
+pixi run mlflow server --backend-store-uri sqlite:///mlflow.db --host 127.0.0.1 --port 5000
 ```
 d) Открываем MLflow UI в браузере: http://127.0.0.1:5000 и смотрим результаты
 
