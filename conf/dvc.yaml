@@ -1,0 +1,28 @@
+stages:
+  preprocess:
+    cmd: python src.data.prepare_data_new.py
+    deps:
+      - src/data/prepare_data_new.py
+      - data/raw/train.csv
+      - data/raw/test.csv
+    outs:
+      - data/processed/train_clean.csv
+      - data/processed/test_clean.csv
+
+  train:
+    cmd: python -m src.train
+    deps:
+      - src/train.py
+      - data/processed/train_clean.csv
+    outs:
+      - models/model.pkl
+      - reports/train_reports/train_info.json
+
+  predict:
+    cmd: python -m src.predict
+    deps:
+      - src/predict.py
+      - models/model.pkl
+      - data/processed/test_clean.csv
+    outs:
+      - data/predictions/submission.csv
