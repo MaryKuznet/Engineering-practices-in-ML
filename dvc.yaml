@@ -12,6 +12,7 @@ stages:
   train:
     cmd: python -m src.train
     deps:
+      - src/models/Different_models.py
       - src/train.py
       - data/processed/train_clean.csv
     outs:
