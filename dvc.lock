@@ -27,18 +27,27 @@ stages:
   train:
     cmd: python -m src.train
     deps:
+    - path: conf
+      hash: md5
+      md5: be143ae0c8ea0dfdb2da8badd0961912.dir
+      size: 355
+      nfiles: 3
     - path: data/processed/train_clean.csv
       hash: md5
       md5: c1b56f4a79f84321dbd55fe64d763a9f
       size: 16995
+    - path: src/config.py
+      hash: md5
+      md5: d7af509140a38b3ba5b1a567ed7683b7
+      size: 566
     - path: src/models/Different_models.py
       hash: md5
       md5: 35045b1439df67d85f9f07b717d6d31b
       size: 7652
     - path: src/train.py
       hash: md5
-      md5: 19891452a583aed6c283a8763788a15b
-      size: 1741
+      md5: 7340b3b325bb7e370c8bbad1b30e960a
+      size: 2192
     outs:
     - path: models/model.pkl
       hash: md5
@@ -51,6 +60,11 @@ stages:
   predict:
     cmd: python -m src.predict
     deps:
+    - path: conf
+      hash: md5
+      md5: be143ae0c8ea0dfdb2da8badd0961912.dir
+      size: 355
+      nfiles: 3
     - path: data/processed/test_clean.csv
       hash: md5
       md5: 7081b5b027f6436d403269bb52ec8e34
@@ -59,10 +73,14 @@ stages:
       hash: md5
       md5: e30f4c6cd642ccb38c9f3a86ebe8f896
       size: 303267
+    - path: src/config.py
+      hash: md5
+      md5: d7af509140a38b3ba5b1a567ed7683b7
+      size: 566
     - path: src/predict.py
       hash: md5
-      md5: cbdb65726825f077a0d94e2bef21c88c
-      size: 1132
+      md5: 4048f3346acf9e6555feb6ec77b45510
+      size: 1280
     outs:
     - path: data/predictions/submission.csv
       hash: md5

@@ -2,24 +2,27 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import hydra
 import joblib
 import pandas as pd
+from hydra.core.config_store import ConfigStore
 
-PROCESSED_TEST_PATH = "data/processed/test_clean.csv"
-MODEL_PATH = "models/model.pkl"
-SUBMISSION_PATH = "data/predictions/submission.csv"
+from src.config import Config
+
+cs = ConfigStore.instance()
+cs.store(name="schema", node=Config)
 
 
-def main() -> None:
-    if not Path(MODEL_PATH).exists():
+@hydra.main(version_base=None, config_path="../conf", config_name="config")  # type: ignore[misc]
+def main(cfg: Config) -> None:
+    if not Path(cfg.data.model_out).exists():
         raise FileNotFoundError(
-            f"Model not found: {MODEL_PATH}. Run training first (dvc repro)."
+            f"Model not found: {cfg.data.model_out}. Run `dvc repro` first."
         )
 
-    model = joblib.load(MODEL_PATH)
+    model = joblib.load(cfg.data.model_out)
 
-    df_test = pd.read_csv(PROCESSED_TEST_PATH)
-
+    df_test = pd.read_csv(cfg.data.test_path)
     if "PassengerId" not in df_test.columns:
         raise ValueError("Expected 'PassengerId' in processed test set for submission")
 
@@ -29,10 +32,11 @@ def main() -> None:
     preds = model.predict(X_test)
 
     out = pd.DataFrame({"PassengerId": passenger_id, "Survived": preds})
-    Path(SUBMISSION_PATH).parent.mkdir(parents=True, exist_ok=True)
-    out.to_csv(SUBMISSION_PATH, index=False)
 
-    print(f"Saved predictions to {SUBMISSION_PATH}")
+    Path(cfg.data.submission_out).parent.mkdir(parents=True, exist_ok=True)
+    out.to_csv(cfg.data.submission_out, index=False)
+
+    print(f"Saved predictions to {cfg.data.submission_out}")
     print(out.head(10).to_string(index=False))
 
 

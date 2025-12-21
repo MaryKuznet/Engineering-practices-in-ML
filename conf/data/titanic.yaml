@@ -1,0 +1,5 @@
+train_path: data/processed/train_clean.csv
+test_path: data/processed/test_clean.csv
+model_out: models/model.pkl
+submission_out: data/predictions/submission.csv
+train_info_out: reports/train_reports/train_info.json

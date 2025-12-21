@@ -12,6 +12,8 @@ stages:
   train:
     cmd: python -m src.train
     deps:
+      - src/config.py
+      - conf
       - src/models/Different_models.py
       - src/train.py
       - data/processed/train_clean.csv
@@ -22,6 +24,8 @@ stages:
   predict:
     cmd: python -m src.predict
     deps:
+      - src/config.py
+      - conf
       - src/predict.py
       - models/model.pkl
       - data/processed/test_clean.csv
