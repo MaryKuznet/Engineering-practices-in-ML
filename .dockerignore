@@ -1,0 +1,25 @@
+# Pixi / Python
+.pixi
+__pycache__/
+*.pyc
+.venv/
+.env
+
+# DVC / data / artifacts
+/data/*
+!/data/raw/
+*.csv
+!/data/processed/
+!*/.gitkeep
+!*.dvc
+
+/mlruns
+*.db
+
+# IDE
+.vscode/
+.idea/
+
+!project_template/**/data/
+# Mac OS-specific storage files
+.DS_Store

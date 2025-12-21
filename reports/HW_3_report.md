@@ -150,22 +150,22 @@ d) Открываем MLflow UI в браузере: http://127.0.0.1:5000 и с
 ```bash
 git clone https://github.com/MaryKuznet/Engineering-practices-in-ML.git
 cd Engineering-practices-in-ML
-git checkout Homework_2
-pixi install
+git checkout Homework_3
 ```
 - соберите контейнер
 ```bash
-docker build --no-cache -t ml-dvc .
+docker build --no-cache -t ml-dvc-2 .
 ```
 - запустите контейнер
 ```bash
 docker run --rm -it `
   -p 5000:5000 `
   -v ${PWD}\dvc_storage:/dvc_storage `
-  -v ${PWD}\mlruns:/app/mlruns `
-  ml-dvc
+  ml-dvc-2
 ```
-- ui mlflow будет по ссылке http://localhost:5000
+
+[//]: # (  -v ${PWD}\mlruns:/app/mlruns `)
+- ui mlflow будет по ссылке http://127.0.0.1:5000
 ---
 
 ## Скриншоты

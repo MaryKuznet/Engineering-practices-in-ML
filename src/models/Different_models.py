@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 from typing import Any, Dict, List, Tuple
 
 import mlflow
@@ -233,9 +234,11 @@ def grids() -> List[Tuple[str, List[Dict[str, Any]]]]:
 
 
 def main() -> None:
+    tracking_uri = os.environ.get("MLFLOW_TRACKING_URI", "http://127.0.0.1:5000")
     cfg = RunConfig(
         experiment_name=EXPERIMENT_NAME,
-        tracking_uri="sqlite:///mlflow.db",
+        # tracking_uri="sqlite:///mlflow.db",
+        tracking_uri=tracking_uri,
     )
     setup_mlflow(cfg)
 
