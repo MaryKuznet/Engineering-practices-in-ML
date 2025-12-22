@@ -38,16 +38,16 @@ stages:
       size: 16995
     - path: src/config.py
       hash: md5
-      md5: d7af509140a38b3ba5b1a567ed7683b7
-      size: 566
+      md5: 1bd715a669fa498facfadda44ee063a7
+      size: 536
     - path: src/models/Different_models.py
       hash: md5
       md5: 35045b1439df67d85f9f07b717d6d31b
       size: 7652
     - path: src/train.py
       hash: md5
-      md5: 7340b3b325bb7e370c8bbad1b30e960a
-      size: 2192
+      md5: 08d4477c3e04712e6ca8a96e2fcbc59b
+      size: 2139
     outs:
     - path: models/model.pkl
       hash: md5
@@ -75,12 +75,12 @@ stages:
       size: 303267
     - path: src/config.py
       hash: md5
-      md5: d7af509140a38b3ba5b1a567ed7683b7
-      size: 566
+      md5: 1bd715a669fa498facfadda44ee063a7
+      size: 536
     - path: src/predict.py
       hash: md5
-      md5: 4048f3346acf9e6555feb6ec77b45510
-      size: 1280
+      md5: 2356d161c7963d4e621e04d25f8f6c76
+      size: 1302
     outs:
     - path: data/predictions/submission.csv
       hash: md5
