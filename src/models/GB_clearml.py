@@ -7,7 +7,7 @@ from typing import Any, Tuple
 import joblib
 import matplotlib.pyplot as plt
 import pandas as pd
-from clearml import Task
+from clearml import OutputModel, Task
 from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.impute import SimpleImputer
 from sklearn.metrics import (
@@ -22,7 +22,7 @@ from sklearn.pipeline import make_pipeline
 
 # ====== Настройки проекта ======
 TRAIN_PATH = "data/processed/train_clean.csv"
-CLEARML_PROJECT = "titanic-dz3-tracking"
+CLEARML_PROJECT = "titanic-dz5-tracking"
 TASK_NAME = "gb_single_run"
 
 
@@ -124,6 +124,24 @@ def main() -> None:
     model_path = "artifacts/gb_model.joblib"
     joblib.dump(model, model_path)
     task.upload_artifact(name="model.joblib", artifact_object=model_path)
+
+    # Регистрация модели
+    out_model = OutputModel(
+        task=task,
+        name="titanic-gb",  # имя модели в Registry
+        tags=["titanic", "gb"],
+        framework="scikit-learn",
+    )
+
+    # метаданные / “описание версии”
+    out_model.set_metadata("project", CLEARML_PROJECT)
+    out_model.set_metadata("task_name", TASK_NAME)
+    out_model.set_metadata("features", list(X.columns))
+    out_model.set_metadata("cv_splits", cfg.cv_splits)
+    out_model.set_metadata("metrics", {"accuracy": acc, "f1": f1, "roc_auc": roc_auc})
+    out_model.set_metadata("labels", ["not_survived", "survived"])
+
+    out_model.update_weights(weights_filename=model_path)
 
     # 8) Небольшая табличка результатов как артефакт
     results = pd.DataFrame(

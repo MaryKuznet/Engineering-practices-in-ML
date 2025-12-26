@@ -19,7 +19,7 @@ from sklearn.tree import DecisionTreeClassifier
 TRAIN_PATH = "data/processed/train_clean.csv"
 
 # ClearML: проект/названия лучше задавать константами
-CLEARML_PROJECT = "titanic-dz3-tracking"
+CLEARML_PROJECT = "titanic-dz5-tracking"
 CLEARML_BASE_TASK = "grid-search"
 
 
