@@ -1,0 +1,38 @@
+site_name: Engineering Practices in ML
+site_description: Project documentation and experiment reports
+repo_url: https://github.com/MaryKuznet/Engineering-practices-in-ML
+repo_name: MaryKuznet/Engineering-practices-in-ML
+
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - content.code.copy
+    - toc.follow
+  palette:
+    - scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+nav:
+  - Home: index.md
+  - Usage: usage.md
+  - Deployment: deployment.md
+  - Reproducibility: reproducibility.md
+  - Experiments:
+      - Overview: experiments/overview.md
+      - Latest report: experiments/latest.md
+
+markdown_extensions:
+  - admonition
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.superfences
+  - pymdownx.details
