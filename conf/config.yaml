@@ -1,0 +1,4 @@
+defaults:
+  - data: titanic
+  - model: gb
+  - _self_
